@@ -98,18 +98,21 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvAddress"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:gravity="start"
                 android:text="@{place.vicinity}"
                 android:textColor="@color/grey_text"
                 android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/icLocation"
                 app:layout_constraintTop_toBottomOf="@id/layoutRating"
                 tools:text="136 - Xuan Thuy street - Cau Giay distr  nnnnnnnnnnict" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
