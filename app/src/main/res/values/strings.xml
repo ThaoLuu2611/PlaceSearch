@@ -5,6 +5,6 @@
     <string name="no_rating">No ratings</string>
     <string name="no_place_found">No place found</string>
     <string name="no_photo_available">NO PHOTO AVAILABE</string>
-    <string name="no_place_available">NO PLACE AVAILABE</string>
+    <string name="no_place_available">NO PLACE FOUND</string>
     <string name="search_hint">Search for items, address...</string>
 </resources>
