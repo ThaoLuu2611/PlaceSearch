@@ -1,0 +1,194 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="place"
+            type="com.thao.placesearch.model.place.Place" />
+
+        <variable
+            name="viewModel"
+            type="com.thao.placesearch.ui.viewmodel.PlaceViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
+
+            <FrameLayout
+                android:id="@+id/layoutPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imvPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:minHeight="150dp"
+                    android:scaleType="fitXY"
+                    android:text="@string/no_photo_available" />
+
+                <TextView
+                    android:id="@+id/tvNoPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/no_photo_available"
+                    android:textColor="@color/grey"
+                    android:textSize="20dp"
+                    android:visibility="gone"
+                    android:textStyle="bold"></TextView>
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_back" />
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutPlaceItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutPhoto"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="-25dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/bg_gray_radius"
+                android:elevation="5dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="@{place.name}"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="University of Engineering " />
+
+                <RelativeLayout
+                    android:id="@+id/layoutRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvName">
+
+                    <ImageView
+                        android:id="@+id/icRating"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_rating"
+                        android:visibility="@{viewModel.getRating(place) != null ? View.VISIBLE : View.GONE}" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/icRating"
+                        android:paddingTop="3dp"
+                        android:text="@{viewModel.getRating(place)}"
+                        android:textColor="@color/grey_text"
+                        android:visibility="@{viewModel.getRating(place) != null ? View.VISIBLE : View.GONE}"
+                        tools:text="4.5 (235)" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/no_rating"
+                        android:textColor="@color/grey_text"
+                        android:visibility="@{viewModel.getRating(place) != null ? View.GONE : View.VISIBLE}"
+                        tools:text="No rating"
+                        tools:visibility="gone" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/icLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layoutRating" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="start"
+                    android:text="@{place.vicinity}"
+                    android:textColor="@color/grey_text"
+                    android:textSize="13dp"
+                    app:layout_constraintStart_toEndOf="@id/icLocation"
+                    app:layout_constraintTop_toBottomOf="@id/layoutRating"
+                    tools:text="136 - Xuan Thuy street - Cau Giay distr  nnnnnnnnnnict" />
+
+                <ImageView
+                    android:id="@+id/icWebsite"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_web"
+                    android:visibility="@{viewModel.isShowWebsite(place) ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/icLocation" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWeb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="5dp"
+                    android:autoLink="web"
+                    android:gravity="start"
+                    android:text="@{place.website}"
+                    android:textColor="@color/grey_text"
+                    android:textSize="13dp"
+                    android:visibility="@{viewModel.isShowWebsite(place) ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icWebsite"
+                    app:layout_constraintTop_toBottomOf="@id/icLocation"
+                    tools:text="www.garden.com" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutPlaceItem">
+
+                <fragment
+                    android:id="@+id/fragmentMap"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp" />
+            </FrameLayout>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
